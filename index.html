@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROI Transport - Transportation, Storage, Crane & Rigging</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Color Scheme from Logo */
+        :root {
+            --navy: #1a2b4c;
+            --orange: #ff6b35;
+            --light-gray: #f8f9fa;
+            --dark-gray: #333;
+            --white: #ffffff;
+            --accent-blue: #2c5aa0;
+        }
+        
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--dark-gray);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--orange);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--white);
+            margin-left: 15px;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Smaller Get Quote button for navigation */
+        .btn-nav {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--orange);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .btn-nav:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--navy);
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--orange);
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background: var(--navy);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .logo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .logo-tagline {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: #ccc;
+            margin-top: 5px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--orange);
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--orange);
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section with Carousel */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+        
+        .carousel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+        
+        .carousel-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .carousel-slide.active {
+            opacity: 1;
+        }
+        
+        .carousel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 43, 76, 0.7);
+            z-index: -1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .carousel-indicators {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 2;
+        }
+        
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            margin: 0 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .carousel-indicator.active {
+            background: var(--orange);
+        }
+        
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 2;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .carousel-control:hover {
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        .carousel-control.prev {
+            left: 20px;
+        }
+        
+        .carousel-control.next {
+            right: 20px;
+        }
+        
+        /* Services Section */
+        .services {
+            background: var(--light-gray);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid var(--orange);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--orange);
+            margin-bottom: 20px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--navy);
+        }
+        
+        /* Storage Details Section */
+        .storage-details {
+            margin-top: 50px;
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .storage-intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .storage-intro h3 {
+            font-size: 1.8rem;
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+        
+        .storage-intro p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .storage-capacity {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .capacity-section {
+            margin-bottom: 30px;
+        }
+        
+        .capacity-section h4 {
+            font-size: 1.4rem;
+            color: var(--navy);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--orange);
+        }
+        
+        .capacity-list {
+            list-style-type: none;
+        }
+        
+        .capacity-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .capacity-list li:before {
+            content: "•";
+            color: var(--orange);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+        
+        /* About Section */
+        .about {
+            background: white;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--navy);
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Team Section */
+        .team {
+            background: var(--light-gray);
+        }
+        
+        .team-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .member-image {
+            height: 350px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
+        }
+        
+        .member-image img {
+            width: auto;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.5s;
+        }
+        
+        .team-member:hover .member-image img {
+            transform: scale(1.05);
+        }
+        
+        .member-info {
+            padding: 25px 20px;
+        }
+        
+        .member-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            color: var(--navy);
+        }
+        
+        .member-title {
+            color: var(--orange);
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        
+        .member-bio {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        /* News & Achievements Section */
+        .news {
+            background: white;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .news-item {
+            background: var(--light-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .news-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .news-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .news-item:hover .news-image img {
+            transform: scale(1.05);
+        }
+        
+        .news-content {
+            padding: 25px;
+        }
+        
+        .news-date {
+            color: var(--orange);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .news-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--navy);
+            line-height: 1.3;
+        }
+        
+        .news-content p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        .news-tag {
+            display: inline-block;
+            background: var(--orange);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        /* Features Section */
+        .features {
+            background: var(--light-gray);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .feature-icon {
+            background: var(--orange);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .feature-content h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--navy);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(rgba(26, 43, 76, 0.9), rgba(26, 43, 76, 0.9)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background: var(--light-gray);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--navy);
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            background: var(--orange);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--navy);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--orange);
+            outline: none;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--navy);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--orange);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--orange);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content, .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.3rem;
+            }
+            
+            .member-image {
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .carousel-control {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .member-image {
+                height: 250px;
+            }
+            
+            .logo-image {
+                width: 40px;
+                height: 40px;
+                margin-right: 10px;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn-secondary {
+                margin-left: 0;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .carousel-control {
+                display: none;
+            }
+            
+            .member-image {
+                height: 200px;
+            }
+            
+            .storage-details {
+                padding: 20px;
+            }
+            
+            .logo-image {
+                width: 35px;
+                height: 35px;
+                margin-right: 8px;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="#home" class="logo-image">
+                    <img src="https://i.ibb.co/VYZk7p1f/ROI-Transport-logo-5-small.png" alt="ROI Transport Logo">
+                </a>
+                <div class="logo-text">
+                    ROI TRANSPORT
+                    <span class="logo-tagline">TRANSPORTATION • STORAGE • CRANE • RIGGING</span>
+                </div>
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#team">Our Team</a></li>
+                    <li><a href="#news">News</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#contact" class="btn-nav">Get Quote</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section with Carousel -->
+    <section class="hero" id="home">
+        <div class="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-slide active" style="background-image: url('https://static.wixstatic.com/media/00ee8b_fde923487c164b58bbc81b1f85c10279~mv2.jpg/v1/fill/w_984,h_738,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/big%20one.jpg');"></div>
+                <div class="carousel-slide" style="background-image: url('https://static.wixstatic.com/media/00ee8b_c8bbcd7e1ae74ac886d213ea4aa7768b~mv2.jpg/v1/fill/w_1536,h_716,al_c,q_85,enc_auto/00ee8b_c8bbcd7e1ae74ac886d213ea4aa7768b~mv2.jpg');"></div>
+                <div class="carousel-slide" style="background-image: url('https://static.wixstatic.com/media/00ee8b_4c1b36c6c16f4079951682c696bdfb70~mv2.jpg/v1/fill/w_1480,h_720,al_c,q_85,enc_auto/12%20trucks.jpg');"></div>
+                <div class="carousel-slide" style="background-image: url('https://static.wixstatic.com/media/00ee8b_758f50c2db83405c93f32a341b84ffda~mv2.jpg/v1/fill/w_1035,h_776,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/00ee8b_758f50c2db83405c93f32a341b84ffda~mv2.jpg');"></div>
+            </div>
+            <div class="carousel-overlay"></div>
+            <button class="carousel-control prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-control next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="carousel-indicators">
+                <div class="carousel-indicator active" data-slide="0"></div>
+                <div class="carousel-indicator" data-slide="1"></div>
+                <div class="carousel-indicator" data-slide="2"></div>
+                <div class="carousel-indicator" data-slide="3"></div>
+            </div>
+        </div>
+        <div class="hero-content container">
+            <h1>Your Trusted Logistics Partner</h1>
+            <p>Transportation, Storage, Crane & Rigging Solutions Across the Nation</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn">Request a Quote</a>
+                <a href="#services" class="btn btn-secondary">Our Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>Comprehensive logistics solutions tailored to your specific needs</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-truck-moving"></i>
+                    </div>
+                    <h3>Transportation</h3>
+                    <p>Full Truckload (FTL) and Less Than Truckload (LTL) services with reliable delivery across all 48 states.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <h3>Storage Solutions</h3>
+                    <p>Secure, climate-controlled storage facilities with flexible terms to meet your inventory needs.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Crane Services</h3>
+                    <p>Heavy lifting solutions with state-of-the-art equipment and certified operators for your most demanding projects.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hard-hat"></i>
+                    </div>
+                    <h3>Rigging Services</h3>
+                    <p>Professional rigging for complex moves with precision planning and execution for maximum safety.</p>
+                </div>
+            </div>
+            
+            <!-- Storage Details Section -->
+            <div class="storage-details">
+                <div class="storage-intro">
+                    <h3>Tailor Made Solutions to Meet Your Needs</h3>
+                    <p>We offer longer term storage options or month to month. Transportation from packager-storage-delivery site makes us your one stop shop.</p>
+                </div>
+                
+                <div class="storage-capacity">
+                    <div class="capacity-section">
+                        <h4>Handling Capacity</h4>
+                        <ul class="capacity-list">
+                            <li>(1) 15K forklift</li>
+                            <li>(2) 15-ton cranes</li>
+                            <li>(1) 90-ton crane</li>
+                            <li>(1) 30K forklift</li>
+                            <li>(1) 120 ton crane</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="capacity-section">
+                        <h4>Storage Capacity</h4>
+                        <ul class="capacity-list">
+                            <li>25,000 sq ft indoor warehouse</li>
+                            <li>16 acres of outdoor storage</li>
+                            <li>Fleet specialized trucks and trailers</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About ROI Transport</h2>
+                <p>Delivering excellence in logistics since 2020</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Your Reliable Partner in Transportation & Logistics</h3>
+                    <p>ROI Transport is committed to providing outstanding customer service with dedicated trucks and/or trailer pools tailored for your specific needs. We offer storage, craning, rigging and drop trailer capacity for preloading for all our direct freight customers.</p>
+                    <p>Our professional service has earned us recognition as a premiere heavy haul carrier in power gen industry. Our team specializes in managing projects with custom solutions specific to each customers needs. Our customers can count on us to handle every aspect of the project from start to finish with the highest level of care and precision.</p>
+                    <p>All of our drivers have extensive experience in heavy haul and carry all necessary tarps, and equipment to protect and secure your freight. Our drivers keep in constant communication so you are updated about delivery appointments.</p>
+                    <p>We operate throughout all 48 states, as well as Canada and Mexico. Let ROI Transport be your choice for your next project, we look forward to providing a turn key process that will logistically transform the way your freight is hauled.</p>
+                    <a href="#contact" class="btn">Contact Us Today</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://static.wixstatic.com/media/00ee8b_57d68dd6cb8040728f5b507a50c31273~mv2.jpg/v1/fill/w_553,h_738,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/crane.jpg" alt="ROI Transport Team">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team" id="team">
+        <div class="container">
+            <div class="section-title">
+                <h2>Meet Our Team</h2>
+                <p>The dedicated professionals behind ROI Transport's success</p>
+            </div>
+            <div class="team-intro">
+                <p>ROI Transport promotes a family atmosphere between drivers, support staff and customers. We look forward to making you feel part of the family.</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://static.wixstatic.com/media/00ee8b_d7ca69961218424a9a639223a0213839~mv2.jpg/v1/fill/w_171,h_323,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Katie%20Wolf%203.jpg" alt="Katie Wolf">
+                    </div>
+                    <div class="member-info">
+                        <h3>Katie Wolf</h3>
+                        <div class="member-title">Founder & CEO</div>
+                        <p class="member-bio">Katie founded ROI Transport with a vision for reliable, customer-focused logistics solutions. Her leadership drives our company's success and commitment to excellence.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://i.ibb.co/nsfY5gc1/chance-wolf-1.jpg" alt="Chance Wolf">
+                    </div>
+                    <div class="member-info">
+                        <h3>Chance Wolf</h3>
+                        <div class="member-title">Manager</div>
+                        <p class="member-bio">Chance brings strong leadership and operational expertise to ROI Transport, ensuring efficient management of our daily operations and maintaining our high standards of service.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://static.wixstatic.com/media/00ee8b_ed08ff2acc474f3cb5951565bb959288~mv2.jpg/v1/fill/w_171,h_323,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/untitled-89.jpg" alt="Michelle Guffey">
+                    </div>
+                    <div class="member-info">
+                        <h3>Michelle Guffey</h3>
+                        <div class="member-title">Business Development</div>
+                        <p class="member-bio">Michelle drives growth and builds lasting relationships with our clients, ensuring their logistics needs are met with exceptional service and attention to detail.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://static.wixstatic.com/media/00ee8b_bb1233a26c1a4c6a9165b2941bf677e9~mv2.jpeg/v1/fill/w_188,h_323,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_2510.jpeg" alt="Zeb Ludtke">
+                    </div>
+                    <div class="member-info">
+                        <h3>Zeb Ludtke</h3>
+                        <div class="member-title">Site Operations Manager</div>
+                        <p class="member-bio">Zeb ensures all site operations run smoothly, coordinating between drivers, clients, and our support team with exceptional efficiency and attention to safety.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://static.wixstatic.com/media/00ee8b_72e6a859981a40c8b67673761cba4fa0~mv2.jpeg/v1/fill/w_188,h_323,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_2508.jpeg" alt="Bo Jones">
+                    </div>
+                    <div class="member-info">
+                        <h3>Bo Jones</h3>
+                        <div class="member-title">Equipment Specialist</div>
+                        <p class="member-bio">Bo brings extensive expertise in heavy equipment, ensuring our fleet is maintained to the highest standards and ready for any transportation challenge.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://static.wixstatic.com/media/00ee8b_5391a8c96c5d4883b50a1e42f98c4a69~mv2.jpg/v1/fill/w_188,h_323,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Facetune_22-04-2025-14-16-37.jpg" alt="Zach Weeks">
+                    </div>
+                    <div class="member-info">
+                        <h3>Zach Weeks</h3>
+                        <div class="member-title">Business Development</div>
+                        <p class="member-bio">Zach focuses on expanding our client relationships and identifying new opportunities to serve the transportation and logistics needs of businesses across the region.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News & Achievements Section -->
+    <section class="news" id="news">
+        <div class="container">
+            <div class="section-title">
+                <h2>News & Achievements</h2>
+                <p>Stay updated with our latest company news, expansions, and project highlights</p>
+            </div>
+            <div class="news-grid">
+                <div class="news-item">
+                    <div class="news-image">
+                        <img src="https://static.wixstatic.com/media/00ee8b_dbfe785ed0f141c6a0b16dcadc89f41e~mv2.jpg/v1/fill/w_984,h_738,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/cummins.jpg" alt="New Oklahoma Facility">
+                    </div>
+                    <div class="news-content">
+                        <span class="news-date">October 15, 2023</span>
+                        <span class="news-tag">Expansion</span>
+                        <h3>New Storage Facility Opens in Oklahoma</h3>
+                        <p>ROI Transport expands operations with a state-of-the-art 50,000 sq ft storage facility in Tulsa, Oklahoma. This new location will serve our growing client base in the Midwest region.</p>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-image">
+                        <img src="https://scontent-dfw5-2.xx.fbcdn.net/v/t39.30808-6/505952696_30944974121768287_2890033728019712765_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=102&ccb=1-7&_nc_sid=833d8c&_nc_ohc=-BSRDNlxRJUQ7kNvwHZpMyM&_nc_oc=AdkLHp8BJczBOV3pxbEzxAEGuMtV9myKrJqMXZwwfLelqJduTc_xetV81g03gFyd_IE&_nc_zt=23&_nc_ht=scontent-dfw5-2.xx&_nc_gid=85NSXU6_q-I1kl-a6h80zQ&oh=00_Afb8VuT-y_YZwJ69L4BEEOvBmF2pW6cWgQHuN0D0_vgTDQ&oe=68E31C87" alt="Safety Award">
+                    </div>
+                    <div class="news-content">
+                        <span class="news-date">September 28, 2023</span>
+                        <span class="news-tag">Achievement</span>
+                        <h3>Excellence in Safety Award 2023</h3>
+                        <p>ROI Transport receives the National Transportation Safety Board's Excellence in Safety Award for maintaining a perfect safety record for three consecutive years.</p>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-image">
+                        <img src="https://static.wixstatic.com/media/00ee8b_4f9a59c6069d4bbcb00ed01aa30c992f~mv2.jpg/v1/fill/w_582,h_776,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/00ee8b_4f9a59c6069d4bbcb00ed01aa30c992f~mv2.jpg" alt="Power Generation Project">
+                    </div>
+                    <div class="news-content">
+                        <span class="news-date">August 12, 2023</span>
+                        <span class="news-tag">Project Spotlight</span>
+                        <h3>Major Power Generation Equipment Transport</h3>
+                        <p>Successfully completed transportation of critical power generation equipment weighing over 200 tons to a new facility in Texas. Our specialized heavy haul team ensured safe and timely delivery.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose ROI Transport</h2>
+                <p>Our commitment to excellence sets us apart in the industry</p>
+            </div>
+            <div class="features-grid">
+                <div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h4>Premiere Heavy Haul Carrier</h4>
+                            <p>Recognized leader in the power generation industry with specialized expertise.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h4>Nationwide Coverage</h4>
+                            <p>Operating throughout all 48 states, Canada, and Mexico for complete coverage.</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-hard-hat"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h4>Experienced Drivers</h4>
+                            <p>All drivers have extensive heavy haul experience and proper equipment.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h4>Constant Communication</h4>
+                            <p>Stay updated with real-time communication about your delivery appointments.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Streamline Your Logistics?</h2>
+            <p>Join hundreds of satisfied clients who trust ROI Transport with their transportation, storage, crane and rigging needs.</p>
+            <a href="#contact" class="btn">Get Your Free Quote Today</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Get in touch with our team for a customized solution</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <p>Have a question about our services or need a quote? Reach out to our team and we'll get back to you promptly.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Our Location</h4>
+                                <p>123 Logistics Drive, Industrial Park, Suite 400<br>Mansfield, Texas USA 12345</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4>Phone Number</h4>
+                                <p>(555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email Address</h4>
+                                <p>info@roiindustry.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Interested In</label>
+                            <select id="service" class="form-control">
+                                <option value="">Select a service</option>
+                                <option value="transportation">Transportation</option>
+                                <option value="storage">Storage</option>
+                                <option value="crane">Crane Services</option>
+                                <option value="rigging">Rigging Services</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ROI TRANSPORT</h3>
+                    <p>Your trusted partner for transportation, storage, crane and rigging services across the nation.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#team">Our Team</a></li>
+                        <li><a href="#news">News</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Our Services</h3>
+                    <ul>
+                        <li><a href="#">Transportation</a></li>
+                        <li><a href="#">Storage Solutions</a></li>
+                        <li><a href="#">Crane Services</a></li>
+                        <li><a href="#">Rigging Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Logistics Drive, Mansfield,Texas USA</li>
+                        <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@roiindustry.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ROI Transport. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Carousel functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            const prevBtn = document.querySelector('.carousel-control.prev');
+            const nextBtn = document.querySelector('.carousel-control.next');
+            let currentSlide = 0;
+            let slideInterval;
+            
+            // Function to show a specific slide
+            function showSlide(index) {
+                // Hide all slides
+                slides.forEach(slide => slide.classList.remove('active'));
+                indicators.forEach(indicator => indicator.classList.remove('active'));
+                
+                // Show the selected slide
+                slides[index].classList.add('active');
+                indicators[index].classList.add('active');
+                currentSlide = index;
+            }
+            
+            // Function to show next slide
+            function nextSlide() {
+                let nextIndex = (currentSlide + 1) % slides.length;
+                showSlide(nextIndex);
+            }
+            
+            // Function to show previous slide
+            function prevSlide() {
+                let prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(prevIndex);
+            }
+            
+            // Start automatic slideshow
+            function startSlideShow() {
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+            
+            // Stop automatic slideshow
+            function stopSlideShow() {
+                clearInterval(slideInterval);
+            }
+            
+            // Event listeners for controls
+            nextBtn.addEventListener('click', function() {
+                stopSlideShow();
+                nextSlide();
+                startSlideShow();
+            });
+            
+            prevBtn.addEventListener('click', function() {
+                stopSlideShow();
+                prevSlide();
+                startSlideShow();
+            });
+            
+            // Event listeners for indicators
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', function() {
+                    stopSlideShow();
+                    showSlide(index);
+                    startSlideShow();
+                });
+            });
+            
+            // Pause slideshow when hovering over carousel
+            const carousel = document.querySelector('.carousel');
+            carousel.addEventListener('mouseenter', stopSlideShow);
+            carousel.addEventListener('mouseleave', startSlideShow);
+            
+            // Start the slideshow
+            startSlideShow();
+            
+            // Simple mobile menu toggle
+            document.querySelector('.mobile-menu').addEventListener('click', function() {
+                document.querySelector('nav ul').style.display = 
+                    document.querySelector('nav ul').style.display === 'flex' ? 'none' : 'flex';
+            });
+            
+            // Form submission
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! We will get back to you soon.');
+                this.reset();
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
