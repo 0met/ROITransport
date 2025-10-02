@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ROI Transport - Transportation, Storage, Crane & Rigging</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Google Maps API (uncomment when you have an API key) -->
+    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script> -->
     <style>
         /* Color Scheme from Logo */
         :root {
@@ -182,6 +186,17 @@
             align-items: center;
         }
         
+        /* Ensure desktop nav is visible by default */
+        @media (min-width: 769px) {
+            nav ul {
+                display: flex !important;
+            }
+            
+            .mobile-menu {
+                display: none !important;
+            }
+        }
+        
         nav ul li {
             margin-left: 30px;
         }
@@ -218,6 +233,84 @@
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
+            padding: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .mobile-menu:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Mobile Navigation Styles */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--navy);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 999;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            display: none;
+            padding-top: 80px;
+        }
+        
+        /* Show mobile nav only on mobile screens */
+        @media (max-width: 768px) {
+            .mobile-nav {
+                display: block;
+            }
+        }
+        
+        /* Hide mobile nav on desktop screens */
+        @media (min-width: 769px) {
+            .mobile-nav {
+                display: none !important;
+            }
+        }
+
+        .mobile-nav.show {
+            transform: translateY(0);
+        }
+
+        .mobile-nav ul {
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            list-style: none;
+            margin: 0;
+            width: 100%;
+        }
+
+        .mobile-nav ul li {
+            margin: 0;
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .mobile-nav ul li:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-nav ul li a {
+            display: block;
+            padding: 10px 0;
+            font-size: 1.1rem;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .mobile-nav ul li a:hover {
+            color: var(--orange);
+        }
+        
+        .mobile-nav ul li a:active {
+            color: var(--orange);
+            background-color: rgba(255, 107, 53, 0.1);
         }
         
         /* Hero Section with Carousel */
@@ -784,6 +877,148 @@
             outline: none;
         }
         
+        /* Map Section */
+        .map-section {
+            margin-top: 60px;
+        }
+        
+        .map-container {
+            position: relative;
+            height: 450px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            max-width: 300px;
+            z-index: 100;
+        }
+        
+        .service-areas h4 {
+            color: var(--navy);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .service-areas ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .service-areas ul li {
+            padding: 8px 0;
+            color: #666;
+            display: flex;
+            align-items: center;
+        }
+        
+        .service-areas ul li i {
+            color: var(--orange);
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        
+        /* Customer Logo Carousel */
+        .customers-section {
+            margin-top: 60px;
+            padding: 50px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+        }
+        
+        .customers-carousel {
+            overflow: hidden;
+            position: relative;
+            margin: 40px 0;
+        }
+        
+        .carousel-track {
+            display: flex;
+            animation: scroll 30s linear infinite;
+            gap: 40px;
+        }
+        
+        .customer-logo {
+            flex: 0 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 180px;
+            height: 100px;
+        }
+        
+        .customer-logo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .customer-logo img {
+            max-width: 100%;
+            max-height: 60px;
+            object-fit: contain;
+            filter: grayscale(100%) opacity(0.7);
+            transition: filter 0.3s ease;
+        }
+        
+        .customer-logo:hover img {
+            filter: grayscale(0%) opacity(1);
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-180px * 8 - 40px * 8)); }
+        }
+        
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+        
+        .customer-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--orange);
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--navy);
+            font-weight: 500;
+        }
+        
         /* Footer */
         footer {
             background: var(--navy);
@@ -867,6 +1102,8 @@
             
             .mobile-menu {
                 display: block;
+                position: relative;
+                z-index: 1002;
             }
             
             .hero-content h1 {
@@ -942,6 +1179,39 @@
             .logo-text {
                 font-size: 1.3rem;
             }
+            
+            /* Responsive styles for new features */
+            .map-overlay {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 20px;
+                max-width: 100%;
+            }
+            
+            .map-container {
+                height: 300px;
+            }
+            
+            .customer-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .customer-logo {
+                width: 150px;
+                height: 80px;
+                padding: 15px;
+            }
+            
+            @keyframes scroll {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(calc(-150px * 8 - 40px * 8)); }
+            }
         }
     </style>
 </head>
@@ -974,6 +1244,18 @@
             </nav>
         </div>
     </header>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <ul>
+            <li><a href="#home" class="mobile-nav-link">Home</a></li>
+            <li><a href="#services" class="mobile-nav-link">Services</a></li>
+            <li><a href="#about" class="mobile-nav-link">About</a></li>
+            <li><a href="#team" class="mobile-nav-link">Our Team</a></li>
+            <li><a href="#news" class="mobile-nav-link">News</a></li>
+            <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+        </ul>
+    </div>
 
     <!-- Hero Section with Carousel -->
     <section class="hero" id="home">
@@ -1096,6 +1378,73 @@
                 </div>
                 <div class="about-image">
                     <img src="https://static.wixstatic.com/media/00ee8b_57d68dd6cb8040728f5b507a50c31273~mv2.jpg/v1/fill/w_553,h_738,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/crane.jpg" alt="ROI Transport Team">
+                </div>
+            </div>
+            
+            <!-- Customer Logos Carousel -->
+            <div class="customers-section">
+                <div class="section-title">
+                    <h3>Trusted by Industry Leaders</h3>
+                    <p>Proudly serving 100+ companies across multiple industries</p>
+                </div>
+                <div class="customers-carousel">
+                    <div class="carousel-track">
+                        <div class="customer-logo">
+                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=CATERPILLAR" alt="Caterpillar">
+                        </div>
+                        <div class="customer-logo">
+                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=GENERAL+ELECTRIC" alt="General Electric">
+                        </div>
+                        <div class="customer-logo">
+                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=SIEMENS" alt="Siemens">
+                        </div>
+                        <div class="customer-logo">
+                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=EXXONMOBIL" alt="ExxonMobil">
+                        </div>
+                        <div class="customer-logo">
+                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=BOEING" alt="Boeing">
+                        </div>
+                        <div class="customer-logo">
+                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=CHEVRON" alt="Chevron">
+                        </div>
+                        <div class="customer-logo">
+                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=3M" alt="3M Company">
+                        </div>
+                        <div class="customer-logo">
+                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=HONEYWELL" alt="Honeywell">
+                        </div>
+                        <!-- Duplicate logos for seamless loop -->
+                        <div class="customer-logo">
+                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=CATERPILLAR" alt="Caterpillar">
+                        </div>
+                        <div class="customer-logo">
+                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=GENERAL+ELECTRIC" alt="General Electric">
+                        </div>
+                        <div class="customer-logo">
+                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=SIEMENS" alt="Siemens">
+                        </div>
+                        <div class="customer-logo">
+                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=EXXONMOBIL" alt="ExxonMobil">
+                        </div>
+                    </div>
+                </div>
+                <div class="customer-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Satisfied Clients</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">48</div>
+                        <div class="stat-label">States Served</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Support Available</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1303,7 +1652,7 @@
                             </div>
                             <div>
                                 <h4>Our Location</h4>
-                                <p>123 Logistics Drive, Industrial Park, Suite 400<br>Mansfield, Texas USA 12345</p>
+                                <p>4209 Aston Ln.<br>Mansfield, TX 76063</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -1359,6 +1708,34 @@
                     </form>
                 </div>
             </div>
+            
+            <!-- Map Section -->
+            <div class="map-section">
+                <div class="section-title">
+                    <h3>Find Us & Service Areas</h3>
+                    <p>Headquartered in Mansfield, Texas - Providing Nationwide Transportation Solutions</p>
+                </div>
+                <div class="map-container">
+                    <div id="map"></div>
+                    <div class="map-overlay">
+                        <div class="service-areas">
+                            <h4>Multiple Locations</h4>
+                            <ul>
+                                <li><i class="fas fa-building"></i> Texas Headquarters & Operations</li>
+                                <li><i class="fas fa-warehouse"></i> Oklahoma Storage Facility</li>
+                                <li><i class="fas fa-truck"></i> All 48 Continental States</li>
+                                <li><i class="fas fa-globe-americas"></i> Canada & Mexico Service</li>
+                                <li><i class="fas fa-highway"></i> Coast-to-Coast Transportation</li>
+                                <li><i class="fas fa-clock"></i> 24/7 Logistics Support</li>
+                            </ul>
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                <a href="https://www.google.com/maps/dir//4209+Aston+Ln,+Mansfield,+TX+76063" target="_blank" class="btn btn-secondary" style="font-size: 0.8rem; padding: 8px 12px;">TX Directions</a>
+                                <a href="https://www.google.com/maps/dir//Oklahoma+City,+OK" target="_blank" class="btn btn-secondary" style="font-size: 0.8rem; padding: 8px 12px;">OK Directions</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1412,8 +1789,141 @@
     </footer>
 
     <script>
-        // Carousel functionality
+        // Map initialization using Leaflet (OpenStreetMap) - No API key required
+        function initMap() {
+            // ROI Transport locations
+            const roiHeadquarters = [32.5635, -97.1390]; // Mansfield, TX
+            const roiOklahoma = [35.4676, -97.5164]; // Oklahoma City, OK (example location)
+            
+            // Create map centered on US for nationwide coverage view
+            const map = L.map('map').setView([39.8283, -98.5795], 4);
+            
+            // Add tile layer (map style)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+            
+            // Custom orange marker icon for headquarters
+            const headquartersIcon = L.divIcon({
+                className: 'custom-marker',
+                html: '<div style="background: #ff6b35; width: 35px; height: 35px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;"><i class="fas fa-building" style="color: white; font-size: 16px;"></i></div>',
+                iconSize: [35, 35],
+                iconAnchor: [17, 17]
+            });
+            
+            // Custom navy marker icon for storage facility
+            const storageIcon = L.divIcon({
+                className: 'custom-marker',
+                html: '<div style="background: #1a2b4c; width: 30px; height: 30px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;"><i class="fas fa-warehouse" style="color: white; font-size: 14px;"></i></div>',
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+            });
+            
+            // Add marker for ROI Transport Headquarters
+            const hqMarker = L.marker(roiHeadquarters, { icon: headquartersIcon }).addTo(map);
+            
+            // Headquarters popup content
+            const hqPopupContent = `
+                <div style="font-family: 'Segoe UI', sans-serif; min-width: 250px;">
+                    <h3 style="color: #1a2b4c; margin: 0 0 10px 0; font-size: 1.2rem;">ROI Transport - Headquarters</h3>
+                    <p style="margin: 5px 0; color: #666; font-size: 0.9rem;"><i class="fas fa-map-marker-alt" style="color: #ff6b35; margin-right: 5px;"></i>4209 Aston Ln, Mansfield, TX 76063</p>
+                    <p style="margin: 5px 0; color: #666; font-size: 0.9rem;"><i class="fas fa-phone" style="color: #ff6b35; margin-right: 5px;"></i>(555) 123-4567</p>
+                    <p style="margin: 5px 0; color: #666; font-size: 0.9rem;"><i class="fas fa-building" style="color: #ff6b35; margin-right: 5px;"></i>Main Office & Operations</p>
+                    <a href="https://www.google.com/maps/dir//4209+Aston+Ln,+Mansfield,+TX+76063" target="_blank" 
+                       style="color: #ff6b35; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                       <i class="fas fa-directions" style="margin-right: 5px;"></i>Get Directions →</a>
+                </div>
+            `;
+            
+            hqMarker.bindPopup(hqPopupContent);
+            
+            // Add marker for Oklahoma Storage Facility
+            const okMarker = L.marker(roiOklahoma, { icon: storageIcon }).addTo(map);
+            
+            // Oklahoma popup content
+            const okPopupContent = `
+                <div style="font-family: 'Segoe UI', sans-serif; min-width: 250px;">
+                    <h3 style="color: #1a2b4c; margin: 0 0 10px 0; font-size: 1.2rem;">ROI Transport - Oklahoma Facility</h3>
+                    <p style="margin: 5px 0; color: #666; font-size: 0.9rem;"><i class="fas fa-map-marker-alt" style="color: #1a2b4c; margin-right: 5px;"></i>Oklahoma City, OK</p>
+                    <p style="margin: 5px 0; color: #666; font-size: 0.9rem;"><i class="fas fa-phone" style="color: #1a2b4c; margin-right: 5px;"></i>(555) 123-4567</p>
+                    <p style="margin: 5px 0; color: #666; font-size: 0.9rem;"><i class="fas fa-warehouse" style="color: #1a2b4c; margin-right: 5px;"></i>Storage & Distribution</p>
+                    <a href="https://www.google.com/maps/dir//Oklahoma+City,+OK" target="_blank" 
+                       style="color: #1a2b4c; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                       <i class="fas fa-directions" style="margin-right: 5px;"></i>Get Directions →</a>
+                </div>
+            `;
+            
+            okMarker.bindPopup(okPopupContent);
+            
+            // Nationwide service area circle (large coverage)
+            const nationwideCircle = L.circle([39.8283, -98.5795], {
+                color: '#ff6b35',
+                fillColor: '#ff6b35',
+                fillOpacity: 0.08,
+                radius: 2200000,
+                weight: 2,
+                opacity: 0.6
+            }).addTo(map);
+            
+            // Regional service area around Texas headquarters (100 mile radius)
+            const txRegionalCircle = L.circle(roiHeadquarters, {
+                color: '#ff6b35',
+                fillColor: '#ff6b35',
+                fillOpacity: 0.1,
+                radius: 160000,
+                weight: 2,
+                opacity: 0.8
+            }).addTo(map);
+            
+            // Regional service area around Oklahoma facility (100 mile radius)
+            const okRegionalCircle = L.circle(roiOklahoma, {
+                color: '#1a2b4c',
+                fillColor: '#1a2b4c',
+                fillOpacity: 0.1,
+                radius: 160000,
+                weight: 2,
+                opacity: 0.8
+            }).addTo(map);
+            
+            // Add custom legend
+            const legend = L.control({position: 'bottomright'});
+            legend.onAdd = function (map) {
+                const div = L.DomUtil.create('div', 'map-legend');
+                div.innerHTML = `
+                    <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); font-family: 'Segoe UI', sans-serif; font-size: 0.8rem;">
+                        <h4 style="margin: 0 0 10px 0; color: #1a2b4c; font-size: 0.9rem;">ROI Transport Locations</h4>
+                        <div style="margin: 5px 0; display: flex; align-items: center;">
+                            <i class="fas fa-building" style="color: #ff6b35; margin-right: 8px; font-size: 12px;"></i>
+                            <span style="color: #666;">Headquarters (TX)</span>
+                        </div>
+                        <div style="margin: 5px 0; display: flex; align-items: center;">
+                            <i class="fas fa-warehouse" style="color: #1a2b4c; margin-right: 8px; font-size: 12px;"></i>
+                            <span style="color: #666;">Storage Facility (OK)</span>
+                        </div>
+                        <div style="margin: 10px 0 5px 0; display: flex; align-items: center;">
+                            <span style="width: 12px; height: 12px; background: #ff6b35; border-radius: 50%; margin-right: 8px; opacity: 0.6;"></span>
+                            <span style="color: #666;">Nationwide Coverage</span>
+                        </div>
+                        <div style="margin: 5px 0; display: flex; align-items: center;">
+                            <span style="width: 12px; height: 12px; background: #ff6b35; border-radius: 50%; margin-right: 8px; opacity: 0.8;"></span>
+                            <span style="color: #666;">TX Regional Area</span>
+                        </div>
+                        <div style="margin: 5px 0; display: flex; align-items: center;">
+                            <span style="width: 12px; height: 12px; background: #1a2b4c; border-radius: 50%; margin-right: 8px; opacity: 0.8;"></span>
+                            <span style="color: #666;">OK Regional Area</span>
+                        </div>
+                    </div>
+                `;
+                return div;
+            };
+            legend.addTo(map);
+        }
+        
+        // Initialize map when page loads
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize the map
+            initMap();
+            
             const slides = document.querySelectorAll('.carousel-slide');
             const indicators = document.querySelectorAll('.carousel-indicator');
             const prevBtn = document.querySelector('.carousel-control.prev');
@@ -1485,10 +1995,42 @@
             // Start the slideshow
             startSlideShow();
             
-            // Simple mobile menu toggle
-            document.querySelector('.mobile-menu').addEventListener('click', function() {
-                document.querySelector('nav ul').style.display = 
-                    document.querySelector('nav ul').style.display === 'flex' ? 'none' : 'flex';
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu');
+            const mobileNav = document.querySelector('.mobile-nav');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileNav.classList.toggle('show');
+                // Toggle hamburger to X icon
+                const icon = this.querySelector('i');
+                if (mobileNav.classList.contains('show')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // Close mobile menu when clicking on a link
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileNav.classList.remove('show');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.mobile-menu') && !e.target.closest('.mobile-nav')) {
+                    mobileNav.classList.remove('show');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
             });
             
             // Form submission
