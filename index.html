@@ -466,14 +466,15 @@
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
         }
         
         .service-card {
             background: white;
-            padding: 40px 30px;
-            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
             text-align: center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -921,11 +922,53 @@
             top: 20px;
             right: 20px;
             background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-            max-width: 300px;
-            z-index: 100;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 0.9rem;
+            z-index: 1000;
+        }
+
+        .map-overlay h4 {
+            margin: 0 0 10px 0;
+            color: #1a2b4c;
+            font-size: 1rem;
+        }
+
+        .map-overlay ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .map-overlay ul li {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .map-overlay ul li i {
+            color: #ff6b35;
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+
+        .map-overlay .btn {
+            margin-top: 10px;
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background: #ff6b35;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .map-overlay .btn:hover {
+            background: #e65a2e;
         }
         
         .service-areas h4 {
@@ -1368,32 +1411,85 @@
                     <div class="capacity-section">
                         <h4>Handling Capacity</h4>
                         <ul class="capacity-list">
-                            <li>(1) 15K forklift</li>
-                            <li>(2) 15-ton cranes</li>
-                            <li>(1) 90-ton crane</li>
-                            <li>(1) 30K forklift</li>
-                            <li>(1) 120 ton crane</li>
+                            <li>Qty 1 100 ton crane - Catoosa OK yard</li>
+                            <li>Qty 1 130 ton crane - Catoosa OK yard</li>
+                            <li>Qty 1 4k forklift - Catoosa OK yard</li>
+                            <li>Qty 1 30k forklift - Grand Prairie Storage facility</li>
                         </ul>
                     </div>
                     
                     <div class="capacity-section">
                         <h4>Storage Capacity</h4>
                         <ul class="capacity-list">
-                            <li>25,000 sq ft indoor warehouse</li>
-                            <li>16 acres of outdoor storage</li>
-                            <li>Fleet specialized trucks and trailers</li>
+                            <li>50,000 sq ft indoor warehouse - Grand Prairie Location</li>
+                            <li>10 acre outdoor storage</li>
                         </ul>
                     </div>
                 </div>
-                
-                <!-- Vimeo Video -->
-                <div class="services-video">
-                    <div style="padding:56.25% 0 0 0;position:relative;margin-top:30px;">
+            </div>
+
+            <!-- Heavy Haul Services for Data Center Industry -->
+            <div class="service-card" style="border: 1px solid #ff6b35; border-radius: 8px; padding: 20px;">
+                <h3 style="color: black; font-weight: bold;">Heavy Haul & Specialized Logistics for the Data Center Industry</h3>
+                <p>We understand the mission-critical nature of data center logistics, including strict timelines and the high-value nature of equipment. Our specialized services are tailored to meet the unique needs of the data center industry.</p>
+                <div class="service-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div class="service-item" style="text-align: center;">
+                        <i class="fas fa-industry" style="color: #ff6b35; font-size: 24px;"></i>
+                        <h4 style="color: black; font-weight: bold;">New Facility Construction</h4>
+                        <p>Transporting oversized HVAC units, chillers, generators, and switchgear.</p>
+                    </div>
+                    <div class="service-item" style="text-align: center;">
+                        <i class="fas fa-expand" style="color: #ff6b35; font-size: 24px;"></i>
+                        <h4 style="color: black; font-weight: bold;">Data Center Expansion</h4>
+                        <p>Delivering modular components and prefab units.</p>
+                    </div>
+                    <div class="service-item" style="text-align: center;">
+                        <i class="fas fa-server" style="color: #ff6b35; font-size: 24px;"></i>
+                        <h4 style="color: black; font-weight: bold;">Relocation Services</h4>
+                        <p>Secure, climate-controlled transport for servers, racks, and other IT infrastructure.</p>
+                    </div>
+                    <div class="service-item" style="text-align: center;">
+                        <i class="fas fa-clock" style="color: #ff6b35; font-size: 24px;"></i>
+                        <h4 style="color: black; font-weight: bold;">Just-in-Time (JIT) Delivery</h4>
+                        <p>Syncing deliveries with construction schedules to prevent costly delays.</p>
+                    </div>
+                </div>
+                <div class="specialized-equipment" style="margin-top: 20px;">
+                    <h4 style="color: black; font-weight: bold;">Specialized Equipment</h4>
+                    <ul>
+                        <li>Air-ride suspension trailers for vibration-sensitive cargo.</li>
+                        <li>Extendable and multi-axle trailers for oversized loads.</li>
+                        <li>Climate-controlled units to protect against temperature fluctuations.</li>
+                    </ul>
+                </div>
+                <div class="risk-mitigation" style="margin-top: 20px;">
+                    <h4 style="color: black; font-weight: bold;">Risk Mitigation</h4>
+                    <p>We prioritize the protection of high-value assets through secure transport and advanced logistics planning.</p>
+                </div>
+            </div>
+
+            <!-- Media Section -->
+            <div class="media-card" style="border: 1px solid #ff6b35; border-radius: 8px; padding: 20px; margin-top: 30px;">
+                <h4 style="color: black; font-weight: bold;">Media</h4>
+                <p>Footage of our storage facility showcasing our capabilities and infrastructure.</p>
+                <div class="services-video" style="margin-top: 20px;">
+                    <div style="padding:56.25% 0 0 0;position:relative;">
                         <iframe src="https://player.vimeo.com/video/1127717723?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
                                 frameborder="0" 
                                 allow="autoplay; fullscreen; picture-in-picture; clipboard-write" 
                                 style="position:absolute;top:0;left:0;width:100%;height:100%;" 
                                 title="ROI Transport - Services Overview"></iframe>
+                    </div>
+                </div>
+                <div class="photo-gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 20px;">
+                    <div class="photo-item" style="border: 1px solid #ccc; border-radius: 8px; overflow: hidden;">
+                        <img src="https://via.placeholder.com/150" alt="Storage Facility Photo 1" style="width: 100%; height: auto;">
+                    </div>
+                    <div class="photo-item" style="border: 1px solid #ccc; border-radius: 8px; overflow: hidden;">
+                        <img src="https://via.placeholder.com/150" alt="Storage Facility Photo 2" style="width: 100%; height: auto;">
+                    </div>
+                    <div class="photo-item" style="border: 1px solid #ccc; border-radius: 8px; overflow: hidden;">
+                        <img src="https://via.placeholder.com/150" alt="Storage Facility Photo 3" style="width: 100%; height: auto;">
                     </div>
                 </div>
             </div>
@@ -1418,73 +1514,6 @@
                 </div>
                 <div class="about-image">
                     <img src="https://static.wixstatic.com/media/00ee8b_57d68dd6cb8040728f5b507a50c31273~mv2.jpg/v1/fill/w_553,h_738,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/crane.jpg" alt="ROI Transport Team">
-                </div>
-            </div>
-            
-            <!-- Customer Logos Carousel -->
-            <div class="customers-section">
-                <div class="section-title">
-                    <h3>Trusted by Industry Leaders</h3>
-                    <p>Proudly serving 100+ companies across multiple industries</p>
-                </div>
-                <div class="customers-carousel">
-                    <div class="carousel-track">
-                        <div class="customer-logo">
-                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=CATERPILLAR" alt="Caterpillar">
-                        </div>
-                        <div class="customer-logo">
-                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=GENERAL+ELECTRIC" alt="General Electric">
-                        </div>
-                        <div class="customer-logo">
-                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=SIEMENS" alt="Siemens">
-                        </div>
-                        <div class="customer-logo">
-                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=EXXONMOBIL" alt="ExxonMobil">
-                        </div>
-                        <div class="customer-logo">
-                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=BOEING" alt="Boeing">
-                        </div>
-                        <div class="customer-logo">
-                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=CHEVRON" alt="Chevron">
-                        </div>
-                        <div class="customer-logo">
-                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=3M" alt="3M Company">
-                        </div>
-                        <div class="customer-logo">
-                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=HONEYWELL" alt="Honeywell">
-                        </div>
-                        <!-- Duplicate logos for seamless loop -->
-                        <div class="customer-logo">
-                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=CATERPILLAR" alt="Caterpillar">
-                        </div>
-                        <div class="customer-logo">
-                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=GENERAL+ELECTRIC" alt="General Electric">
-                        </div>
-                        <div class="customer-logo">
-                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=SIEMENS" alt="Siemens">
-                        </div>
-                        <div class="customer-logo">
-                            <img src="https://via.placeholder.com/150x80/333333/ffffff?text=EXXONMOBIL" alt="ExxonMobil">
-                        </div>
-                    </div>
-                </div>
-                <div class="customer-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">100+</div>
-                        <div class="stat-label">Satisfied Clients</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">1000+</div>
-                        <div class="stat-label">Projects Completed</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">48</div>
-                        <div class="stat-label">States Served</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">24/7</div>
-                        <div class="stat-label">Support Available</div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1764,19 +1793,15 @@
                     <div id="map"></div>
                     <div class="map-overlay">
                         <div class="service-areas">
-                            <h4>Multiple Locations</h4>
+                            <h4>ROI Transport Locations</h4>
                             <ul>
-                                <li><i class="fas fa-building"></i> Texas Headquarters & Operations</li>
-                                <li><i class="fas fa-warehouse"></i> Oklahoma Storage Facility</li>
-                                <li><i class="fas fa-truck"></i> All 48 Continental States</li>
-                                <li><i class="fas fa-globe-americas"></i> Canada & Mexico Service</li>
-                                <li><i class="fas fa-highway"></i> Coast-to-Coast Transportation</li>
-                                <li><i class="fas fa-clock"></i> 24/7 Logistics Support</li>
+                                <li><i class="fas fa-building"></i> Headquarters (TX)</li>
+                                <li><i class="fas fa-warehouse"></i> Storage Facility (OK)</li>
+                                <li><i class="fas fa-warehouse"></i> Storage Facility (Grand Prairie, TX)</li>
+                                <li><i class="fas fa-circle" style="color: #ff6b35;"></i> Nationwide Coverage</li>
+                                <li><i class="fas fa-circle" style="color: #ff6b35;"></i> TX Regional Area</li>
+                                <li><i class="fas fa-circle" style="color: #1a2b4c;"></i> OK Regional Area</li>
                             </ul>
-                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                                <a href="https://www.google.com/maps/dir//4209+Aston+Ln,+Mansfield,+TX+76063" target="_blank" class="btn btn-secondary" style="font-size: 0.8rem; padding: 8px 12px;">TX Directions</a>
-                                <a href="https://www.google.com/maps/dir//Oklahoma+City,+OK" target="_blank" class="btn btn-secondary" style="font-size: 0.8rem; padding: 8px 12px;">OK Directions</a>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -1831,11 +1856,12 @@
         function initMap() {
             // ROI Transport locations
             const roiHeadquarters = [32.5635, -97.1390]; // Mansfield, TX
-            const roiOklahoma = [35.4676, -97.5164]; // Oklahoma City, OK (example location)
-            
+            const roiOklahoma = [35.4676, -97.5164]; // Oklahoma City, TX
+            const roiGrandPrairie = [32.7460, -97.0203]; // Grand Prairie, TX
+
             // Create map centered on US for nationwide coverage view
             const map = L.map('map').setView([39.8283, -98.5795], 4);
-            
+
             // Add tile layer (map style)
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© OpenStreetMap contributors'
@@ -1849,7 +1875,7 @@
                 iconAnchor: [17, 17]
             });
             
-            // Custom navy marker icon for storage facility
+            // Custom navy marker icon for Oklahoma facility
             const storageIcon = L.divIcon({
                 className: 'custom-marker',
                 html: '<div style="background: #1a2b4c; width: 30px; height: 30px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;"><i class="fas fa-warehouse" style="color: white; font-size: 14px;"></i></div>',
@@ -1857,104 +1883,46 @@
                 iconAnchor: [15, 15]
             });
             
+            // Custom green marker icon for Grand Prairie facility
+            const grandPrairieIcon = L.divIcon({
+                className: 'custom-marker',
+                html: '<div style="background: #28a745; width: 32px; height: 32px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;"><i class="fas fa-warehouse" style="color: white; font-size: 14px;"></i></div>',
+                iconSize: [32, 32],
+                iconAnchor: [16, 16]
+            });
+
             // Add marker for ROI Transport Headquarters
             const hqMarker = L.marker(roiHeadquarters, { icon: headquartersIcon }).addTo(map);
-            
-            // Headquarters popup content
-            const hqPopupContent = `
+            hqMarker.bindPopup(`
                 <div style="font-family: 'Segoe UI', sans-serif; min-width: 250px;">
                     <h3 style="color: #1a2b4c; margin: 0 0 10px 0; font-size: 1.2rem;">ROI Transport - Headquarters</h3>
                     <p style="margin: 5px 0; color: #666; font-size: 0.9rem;"><i class="fas fa-map-marker-alt" style="color: #ff6b35; margin-right: 5px;"></i>4209 Aston Ln, Mansfield, TX 76063</p>
                     <p style="margin: 5px 0; color: #666; font-size: 0.9rem;"><i class="fas fa-phone" style="color: #ff6b35; margin-right: 5px;"></i>(555) 123-4567</p>
                     <p style="margin: 5px 0; color: #666; font-size: 0.9rem;"><i class="fas fa-building" style="color: #ff6b35; margin-right: 5px;"></i>Main Office & Operations</p>
-                    <a href="https://www.google.com/maps/dir//4209+Aston+Ln,+Mansfield,+TX+76063" target="_blank" 
-                       style="color: #ff6b35; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
-                       <i class="fas fa-directions" style="margin-right: 5px;"></i>Get Directions →</a>
                 </div>
-            `;
-            
-            hqMarker.bindPopup(hqPopupContent);
-            
+            `);
+
             // Add marker for Oklahoma Storage Facility
             const okMarker = L.marker(roiOklahoma, { icon: storageIcon }).addTo(map);
-            
-            // Oklahoma popup content
-            const okPopupContent = `
+            okMarker.bindPopup(`
                 <div style="font-family: 'Segoe UI', sans-serif; min-width: 250px;">
                     <h3 style="color: #1a2b4c; margin: 0 0 10px 0; font-size: 1.2rem;">ROI Transport - Oklahoma Facility</h3>
                     <p style="margin: 5px 0; color: #666; font-size: 0.9rem;"><i class="fas fa-map-marker-alt" style="color: #1a2b4c; margin-right: 5px;"></i>Oklahoma City, OK</p>
                     <p style="margin: 5px 0; color: #666; font-size: 0.9rem;"><i class="fas fa-phone" style="color: #1a2b4c; margin-right: 5px;"></i>(555) 123-4567</p>
-                    <p style="margin: 5px 0; color: #666; font-size: 0.9rem;"><i class="fas fa-warehouse" style="color: #1a2b4c; margin-right: 5px;"></i>Storage & Distribution</p>
-                    <a href="https://www.google.com/maps/dir//Oklahoma+City,+OK" target="_blank" 
-                       style="color: #1a2b4c; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
-                       <i class="fas fa-directions" style="margin-right: 5px;"></i>Get Directions →</a>
+                                       <p style="margin: 5px 0; color: #666; font-size: 0.9rem;"><i class="fas fa-warehouse" style="color: #1a2b4c; margin-right: 5px;"></i>Storage & Distribution</p>
                 </div>
-            `;
-            
-            okMarker.bindPopup(okPopupContent);
-            
-            // Nationwide service area circle (large coverage)
-            const nationwideCircle = L.circle([39.8283, -98.5795], {
-                color: '#ff6b35',
-                fillColor: '#ff6b35',
-                fillOpacity: 0.08,
-                radius: 2200000,
-                weight: 2,
-                opacity: 0.6
-            }).addTo(map);
-            
-            // Regional service area around Texas headquarters (100 mile radius)
-            const txRegionalCircle = L.circle(roiHeadquarters, {
-                color: '#ff6b35',
-                fillColor: '#ff6b35',
-                fillOpacity: 0.1,
-                radius: 160000,
-                weight: 2,
-                opacity: 0.8
-            }).addTo(map);
-            
-            // Regional service area around Oklahoma facility (100 mile radius)
-            const okRegionalCircle = L.circle(roiOklahoma, {
-                color: '#1a2b4c',
-                fillColor: '#1a2b4c',
-                fillOpacity: 0.1,
-                radius: 160000,
-                weight: 2,
-                opacity: 0.8
-            }).addTo(map);
-            
-            // Add custom legend
-            const legend = L.control({position: 'bottomright'});
-            legend.onAdd = function (map) {
-                const div = L.DomUtil.create('div', 'map-legend');
-                div.innerHTML = `
-                    <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); font-family: 'Segoe UI', sans-serif; font-size: 0.8rem;">
-                        <h4 style="margin: 0 0 10px 0; color: #1a2b4c; font-size: 0.9rem;">ROI Transport Locations</h4>
-                        <div style="margin: 5px 0; display: flex; align-items: center;">
-                            <i class="fas fa-building" style="color: #ff6b35; margin-right: 8px; font-size: 12px;"></i>
-                            <span style="color: #666;">Headquarters (TX)</span>
-                        </div>
-                        <div style="margin: 5px 0; display: flex; align-items: center;">
-                            <i class="fas fa-warehouse" style="color: #1a2b4c; margin-right: 8px; font-size: 12px;"></i>
-                            <span style="color: #666;">Storage Facility (OK)</span>
-                        </div>
-                        <div style="margin: 10px 0 5px 0; display: flex; align-items: center;">
-                            <span style="width: 12px; height: 12px; background: #ff6b35; border-radius: 50%; margin-right: 8px; opacity: 0.6;"></span>
-                            <span style="color: #666;">Nationwide Coverage</span>
-                        </div>
-                        <div style="margin: 5px 0; display: flex; align-items: center;">
-                            <span style="width: 12px; height: 12px; background: #ff6b35; border-radius: 50%; margin-right: 8px; opacity: 0.8;"></span>
-                            <span style="color: #666;">TX Regional Area</span>
-                        </div>
-                        <div style="margin: 5px 0; display: flex; align-items: center;">
-                            <span style="width: 12px; height: 12px; background: #1a2b4c; border-radius: 50%; margin-right: 8px; opacity: 0.8;"></span>
-                            <span style="color: #666;">OK Regional Area</span>
-                        </div>
-                    </div>
-                `;
-                return div;
-            };
-            legend.addTo(map);
+            `);
+
+            // Add marker for Grand Prairie Storage Facility
+            const grandPrairieMarker = L.marker(roiGrandPrairie, { icon: grandPrairieIcon }).addTo(map);
+            grandPrairieMarker.bindPopup(`
+                <div style="font-family: 'Segoe UI', sans-serif; min-width: 250px;">
+                    <h3 style="color: #1a2b4c; margin: 0 0 10px 0; font-size: 1.2rem;">ROI Storage - Grand Prairie</h3>
+                    <p style="margin: 5px 0; color: #666; font-size: 0.9rem;"><i class="fas fa-map-marker-alt" style="color: #28a745; margin-right: 5px;"></i>1990 Hwy 360 North, Grand Prairie, TX 75050</p>
+                    <p style="margin: 5px 0; color: #666; font-size: 0.9rem;"><i class="fas fa-phone" style="color: #28a745; margin-right: 5px;"></i>(555) 123-4567</p>
+                    <p style="margin: 5px 0; color: #666; font-size: 0.9rem;"><i class="fas fa-warehouse" style="color: #28a745; margin-right: 5px;"></i>Storage Facility</p>
+                </div>
+            `);
         }
         
         // Initialize map when page loads
